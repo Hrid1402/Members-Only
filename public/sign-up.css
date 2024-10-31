@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+:root{
+    --backgroundColor: #222831;
+    --textColor: #EEEEEE;
+    --specialColor: #76ABAE;
+}
+body{
+    background-color: var(--backgroundColor);
+    color: var(--textColor);
+    font-family: "Hind Siliguri", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.TOP{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.TOP h1, .TOP p{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+form{
+    margin-top: 35px;
+    font-size: 24px;
+    background-color: var(--specialColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    height: 70vh;
+    border-radius: 10px;
+}
+input{
+    font-size: 22px;
+    padding: 5px 7px;
+    border-radius: 5px;
+    outline: none;
+    border: 0;
+    background-color: var(--textColor);
+}
+form .inputs{
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+form .inputs .names{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.Input{
+    display: flex;
+    flex-direction: column;
+}
+form button{
+    margin: 35px;
+    padding: 10px;
+    width: 100%;
+    font-size: 22px;
+    border-radius: 5px;
+    color: var(--textColor);
+    border: 2px solid var(--textColor);
+    background-color: var(--specialColor);
+}
+form button:hover{
+    cursor: pointer;
+    color: var(--specialColor);
+    background-color: var(--textColor);
+}

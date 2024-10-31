@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./sign-up.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <form action="/sign-up" method="POST">
+        <div class="TOP">
+            <h1>Sign Up</h1>
+            <p href="">Already a member? <a href="/log-in">Login</a></p>
+        </div>
+        <div class="inputs">
+            <div class="names">
+                <div class="Input">
+                    <label for="firstName">First name</label>
+                    <input id="firstName" name="firstName" type="text" />
+                </div>
+
+                <div class="Input">
+                    <label for="lastName">Last name:</label>
+                    <input id="lastName" name="lastName" type="text" />
+                </div>
+            </div>
+
+            <div class="Input">
+                <label for="username">Username:</label>
+                <input id="username" name="username"  type="text" />
+            </div>
+            <div class="Input">
+                <label for="email">Email:</label>
+                <input id="email" name="email" type="email" />
+            </div>
+            
+            <div class="Input">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" />
+            </div>
+
+            <div class="Input">
+                <label for="password2">Confirm password</label>
+                <input id="password2" name="password2" type="password" />
+            </div> 
+        </div>
+
+        <button>Sign Up</button>
+      </form>
+</body>
+</html>
