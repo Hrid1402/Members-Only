@@ -8,6 +8,7 @@
     color: var(--specialColor);
 }
 body{
+    margin: 0;
     background-color: var(--backgroundColor);
     color: var(--textColor);
     font-family: "Hind Siliguri", sans-serif;
@@ -15,6 +16,9 @@ body{
     font-style: normal;
 }
 .TOP{
+    position: sticky;
+    padding: 10px;
+    top: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -42,14 +46,16 @@ body{
 .TOP .loged{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
-.TOP .buttons button:hover, .TOP .loged button:hover{
+.TOP .buttons button:hover, .TOP .loged button:hover, .create button:hover{
     cursor: pointer;
     background-color: var(--textColor);
     color: var(--specialColor);
     border: 2px solid var(--textColor);
 }
-.TOP .loged button{
+.TOP .loged .logout{
+    width: 100%;
     font-family: "Hind Siliguri", sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -59,4 +65,81 @@ body{
     color: var(--textColor);
     border-radius: 5px;
     border: 2px solid var(--textColor);
+}
+.create{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+.create button{
+    width: 100%;
+    font-family: "Hind Siliguri", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    padding: 5px 20px;
+    font-size: 25px;
+    background-color: var(--specialColor);
+    color: var(--textColor);
+    border-radius: 5px;
+    border: 2px solid var(--textColor);
+}
+.delete{
+    background-color: rgb(255, 126, 126);
+    border-radius: 5px;
+    outline: 0;
+    border: 2px solid rgb(206, 54, 54);
+    padding: 5px 5px;
+}
+.delete:hover{
+    background-color: rgb(250, 76, 76);
+}
+.secretCode{
+    width: 50%;
+    font-family: "Hind Siliguri", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    padding: 5px 5px;
+    margin-top: 5px;
+    font-size: 15px;
+    background-color: var(--specialColor);
+    color: var(--textColor);
+    border-radius: 5px;
+    border: 2px solid var(--textColor);
+}
+/* Secrets  */* 
+.secrets{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.secret h4{
+    margin: 0;
+}
+.secrets .content{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 75px;
+    width: 50%;
+}
+.secret .top h2{
+    font-size: 25px;
+    margin: 0;
+}
+.secret .top h3{
+    font-size: 20px;
+    margin: 0;
+    color: var(--backgroundColor);
+}
+.secret{
+    width: 100%;
+    padding: 25px;
+    border-radius: 25px;
+    background-color: var(--specialColor);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 25px;
 }

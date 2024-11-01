@@ -4,23 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
+    <link rel="icon" href="./iconSecret.png" >
     <title>Whisper Room</title>
 </head>
 <body>
     <div class="TOP">
-        <h1 class="title">Whisper Room</h1>
-        <% if (locals.user) {%>
-            <div class="loged">
-                <h2>Welcome back <span class="username"><%= user.username %></span></h2>
-                <button onclick="location.href='/log-out'">Logout</button>
+        <div>
+            <h1 class="title">Whisper Room</h1>
+            <% if (user) {%>
+            <div class="create">
+                <button onclick="location.href='/mySecrets'">My secrets</button>
+                <button onclick="location.href='/addSecret'">Write a secret</button>
             </div>
-        <% }else{%>
-            <div class="buttons">
-                <button onclick="location.href='/sign-up'">Sign up</button>
-                <button onclick="location.href='/log-in'">Login</button>
-            </div>
-            
-        <% }%>
+            <% }%>
+        </div>
+    <% if (user) {%>
+        <div class="loged">
+            <h2>Welcome back <span class="username"><%= user.username %></span></h2>
+            <button class="logout" onclick="location.href='/log-out'">Logout</button>
+            <% if (locals.user.admin) {%>
+                <h2>STATUS: ADMIN</h2>
+            <% }else{%>
+            <button class="secretCode" onclick="location.href='/secretCode'">Secret Code</button>
+            <% }%>
+        </div>
+    <% }else{%>
+        <div class="buttons">
+            <button onclick="location.href='/sign-up'">Sign up</button>
+            <button onclick="location.href='/log-in'">Login</button>
+        </div>
+    <% }%>
+    </div>
+    <div class="secrets">
+        <%if (!user) {%>
+            <h1>Log in to be able to write secrets and see authors.</h1>
+        <%}%>
+        <div class="content">
+            <%secrets.map(s=>{%>
+                <div class="secret">
+                    <div class="top">
+                        <h2><%=s.title%></h2>
+                        <h3>Author: <% if (!user) { %>Secret<% } else { %><%= s.author %><% } %></h3>
+                    </div>
+                    <p><%=s.content%></p>
+                    <h4><%=s.date%></h4>
+                    <% if (user && user.admin) {%>
+                        <form action="/delete/<%=s.id%>&<%=s.author_id%>" method="POST">
+                            <button class="delete" type="submit">Delete</button>
+                        </form>
+                    <% }%>
+                </div>
+            <%})%>
+        </div>
+        
     </div>
     
 </body>
