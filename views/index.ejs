@@ -20,7 +20,7 @@
         </div>
     <% if (user) {%>
         <div class="loged">
-            <h2>Welcome back <span class="username"><%= user.username %></span></h2>
+            <h2 class="welcome">Welcome back <span class="username"><%= user.username %></span></h2>
             <button class="logout" onclick="location.href='/log-out'">Logout</button>
             <% if (locals.user.admin) {%>
                 <h2>STATUS: ADMIN</h2>
@@ -37,7 +37,7 @@
     </div>
     <div class="secrets">
         <%if (!user) {%>
-            <h1>Log in to be able to write secrets and see authors.</h1>
+            <h1 class="message">Log in to be able to write secrets and see authors.</h1>
         <%}%>
         <div class="content">
             <%secrets.map(s=>{%>

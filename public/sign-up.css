@@ -33,7 +33,6 @@ form{
     flex-direction: column;
     align-items: center;
     padding: 25px;
-    height: 70vh;
     border-radius: 10px;
 }
 input{
@@ -60,7 +59,7 @@ form .inputs .names{
     flex-direction: column;
 }
 form button{
-    margin: 35px;
+    margin-top: 20px;
     padding: 10px;
     width: 100%;
     font-size: 22px;
@@ -73,4 +72,12 @@ form button:hover{
     cursor: pointer;
     color: var(--specialColor);
     background-color: var(--textColor);
+}
+@media (max-width:644px){
+    form{
+        width: 400px;
+    }
+    input{
+        width: 100%;
+    }
 }

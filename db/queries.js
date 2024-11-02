@@ -35,6 +35,10 @@ async function deleteSecretById(id){
 async function giveAdmin(userId){
     await pool.query("UPDATE users SET admin = TRUE WHERE id = $1", [userId]);
 }
+async function selectByUsername(username){
+    const {rows} = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+    return rows[0];
+}
 
 module.exports = {
     addUser,
@@ -45,5 +49,6 @@ module.exports = {
     addSecret,
     getAllSecretsById,
     deleteSecretById,
-    giveAdmin
+    giveAdmin,
+    selectByUsername
 };

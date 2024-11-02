@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
@@ -19,6 +20,44 @@ app.set("view engine", "ejs");
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
+
+const validateSignUp = [
+  body("firstName")
+    .notEmpty().withMessage("First name is required.")
+    .trim()
+    .isAlpha().withMessage("First name must contain only letters.")
+    .isLength({ min: 2, max: 15 })
+    .withMessage("The first name must have between 2 to 15 characters."),
+  
+  body("lastName")
+    .notEmpty().withMessage("Last name is required.")
+    .trim()
+    .isAlpha().withMessage("Last name must contain only letters.")
+    .isLength({ min: 2, max: 15 })
+    .withMessage("The last name must have between 2 to 15 characters."),
+  
+  body("username")
+    .notEmpty().withMessage("Username is required.")
+    .isLength({ min: 2, max: 15 })
+    .withMessage("The username must have between 2 to 15 characters."),
+  
+  body("email")
+    .notEmpty().withMessage("Email is required.")
+    .isEmail().withMessage("Please enter a valid email address."),
+    
+  body("password")
+    .notEmpty().withMessage("Password is required.")
+    .isLength({ min: 8, max: 64 }).withMessage("Password must be between 8 and 64 characters."),
+  
+    body("password2")
+    .notEmpty().withMessage("Please confirm your password.")
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords do not match.");
+      }
+      return true;
+    })
+];
 
 passport.use(
   new LocalStrategy({
@@ -87,10 +126,31 @@ app.get("/mySecrets", async (req, res) => {
   }
 });
 
+const getFirstErrors = (result) => {
+  let firstErrors = [];
+  let curPath = ""
+  result.array().forEach(error => {
+    if (error.path != curPath) {
+      firstErrors.push(error.msg);
+      curPath = error.path;
+    }
+  });
+
+  return firstErrors;
+};
 
 
-
-app.post("/sign-up", async (req, res, next) => {
+app.post("/sign-up", validateSignUp, async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(getFirstErrors(errors));
+      return res.render("errors", {errors: getFirstErrors(errors)});
+      }
+    const username = await db.selectByUsername(req.body.username);
+    console.log(username);
+    if(username){
+      return res.render("errors", {errors: ["Username '"+ username.username + "' already exists."]});
+    }
     bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
         try {
             const user = await db.addUser(req.body.firstName, req.body.lastName, req.body.email, req.body.username, hashedPassword);
